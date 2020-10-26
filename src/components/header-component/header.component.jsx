@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
 import { auth } from "../../firebase/firebase.utils";
 import { ReactComponent as Logo } from "../../assets/4.3 crown.svg.svg";
 
@@ -22,12 +23,16 @@ const Header = ({ currentUser }) => (
           Sign Out
         </div>
       ) : (
-        <Link className="option" to="/signin">
-          Sign In
-        </Link>
-      )}
+          <Link className="option" to="/signin">
+            Sign In
+          </Link>
+        )}
     </div>
   </div>
 );
 
-export default Header;
+const mapStateToProps = state => ({
+  currentUser: state.user.currentUser
+});
+
+export default connect(mapStateToProps)(Header);
